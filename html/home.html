@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #ustTaraf {
+            background-color: rgb(77, 75, 75);
+            color: white;
+            margin: 10px;
+            border-radius: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #imageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .imageBox {
+            margin: 10px;
+            text-align: center;
+        }
+
+        .imageBox img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ustTaraf">
+        <h2>Home | Schedule | Resources</h2>
+    </div>
+<table>
+        <tr>
+            <td>
+                <h4>Related:</h4>
+                <ul style="list-style-type: square;">
+                    <li>CogRob</li>
+                    <li>Lecturer</li>
+                    <li>GaTech</li>
+                    <li>SciKit-Learn</li>
+                    <li>KM-Toolkit</li>
+                </ul>
+            </td>
+            <td>
+                <h1 style="color: red;">Welcome</h1>
+                <p>Tuesdays & Thursday 3:05- 4:25PM in Klaus 123</p>
+                <div id="imageContainer">
+                    <div class="imageBox"><p>Instructor: </p><img src="C:\Users\busen\Desktop\pic1.jpg" alt="adam1"></div>
+                    <div class="imageBox"><p>TA: </p><img src="C:\Users\busen\Desktop\pic2.jpg" alt="adam2"></div>
+                </div>
+                <div id="imageContainer">
+                    <div class="imageBox"><p>TA: </p><img src="C:\Users\busen\Desktop\pic3.jpg" alt="adam3"></div>
+                    <div class="imageBox"><p>TA: </p><img src="C:\Users\busen\Desktop\pic4.jpg" alt="adam4"></div>
+                </div>
+                <h2 style="color: red;">Who is This For?</h2>
+                <p>This is a graduate level for those interested in pattern recognition in general and for some elements as applied to computer vision. It is not going to be a comprehensive Machine Learning course.</p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
