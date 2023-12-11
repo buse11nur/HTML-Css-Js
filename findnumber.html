@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find Next Number</title>
+	<style type="text/css">
+
+		html, body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		#header {
+			top: 0;
+			left: 0;
+			position: fixed;
+			width: 100%;
+			height: 100px;
+			padding: 10px 0;
+			background-color: #DFDFDF;
+			display: flex;
+			align-items: center;
+			z-index: 100;
+		}
+
+		.wrap-inline {
+			display: inline-block;
+		}
+
+		#container {
+			position: relative;
+			margin-top: 120px;
+			width: 100%;
+		}
+
+		#blocks {
+			position: relative;
+			margin: 0 auto;
+		}
+
+		.block {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			font-weight: bolder;
+			font-size: 2.5em;
+			color: #000088;
+			background-color: #cccccc;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			user-select: none;
+			cursor: pointer;
+			border: 4px solid transparent;
+		}
+
+		.border {
+			border-color: #FF0000;
+			transition: all 0.25s ease;
+		}
+
+		#numberToFind {
+			user-select: none;
+			width: 80px;
+			height: 80px;
+			font-weight: bolder;
+			font-size: 2.5em;
+			color: #cccccc;
+			background-color: #000088;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+		}
+
+		#counter {
+			user-select: none;
+			width: 100px;
+			height: 80px;
+			font-weight: bolder;
+			font-size: 2.5em;
+			color: #222222;
+			background-color: inherit;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		}
+
+		.button {
+			user-select: none;
+			width: 200px;
+			height: 80px;
+			font-weight: bolder;
+			font-size: 2.2em;
+			color: #ffffff;
+			background-color: #1E90FF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			border-radius: 50px;
+			margin-left: 15px;
+		}
+
+		.button:hover {
+			background-color: #00BFFF;
+		}
+
+		.button:active {
+			background-color: #4682B4;
+		}
+	</style>
+	<script type="text/javascript">
+
+		var counter = 1,
+			totalNumbers = 0,
+			numArr = [],
+			timerHandleID = -1,
+			lastTime = 0;
+			sec = 0,
+			check_time = 0;
+			startLock = false,
+			initiated = false;
+
+		var restartEl, counterEl, numberToFindEl, blocksEl;
+
+		function loadElementRefs() {
+			if( initiated )
+				return
+			restartEl = document.querySelector('#restart');
+			counterEl = document.querySelector('#counter');
+			numberToFindEl = document.querySelector('#numberToFind');
+			blocksEl = document.querySelector('#blocks');
+			initiated = true;
+		}
+
+		function numberArray(mat) {
+			var tn = 2*Math.pow(mat, 2);
+			totalNumbers = tn;
+			for(var i=0;i<tn;i++) {
+				numArr.push(i+1);
+			}
+		}
+
+		function nextRandom() {
+			var rn = numArr[0];
+			numArr.splice(0, 1);
+			return rn;
+		}
+
+		function shuffle(array, pos) {
+		  var currentIndex = (pos || array.length), temporaryValue, randomIndex;
+
+		  // While there remain elements to shuffle...
+		  while (0 !== currentIndex) {
+
+		    // Pick a remaining element...
+		    randomIndex = Math.floor(Math.random() * currentIndex);
+		    currentIndex -= 1;
+
+		    // And swap it with the current element.
+		    temporaryValue = array[currentIndex];
+		    array[currentIndex] = array[randomIndex];
+		    array[randomIndex] = temporaryValue;
+		  }
+
+		  return array;
+		}
+
+		function clickHandler(e) {
+
+			if(sec === 0) {
+				lastTime = new Date().getTime();
+				timer();
+				restartEl.style.display = '';
+				startLock = false;
+			}
+
+			if(counter === Number(e.currentTarget.innerText)) {
+				check_time = new Date().getTime();
+				e.currentTarget.classList.remove('border');
+				if(numArr.length === 0) {
+					e.currentTarget.removeEventListener('click', clickHandler);
+					// e.currentTarget.style.display = 'none';
+					var blocks = blocksEl //document.body;
+					blocks.removeChild(e.currentTarget);
+					counter++;
+
+					if(counter > totalNumbers) {
+						clearInterval(timerHandleID);
+						counter = 1;
+						restartEl.style.display = '';
+						numberToFindEl.style.display = 'none';
+						return;
+					}
+					numberToFindEl.innerHTML = counter;
+					return;
+				}
+
+				var nextNumber = nextRandom();
+				e.currentTarget.style.backgroundColor = '#aaaaaa';
+				e.currentTarget.innerHTML = nextNumber //Number(e.currentTarget.innerText) + 25;
+				counter++;
+
+				e.currentTarget.id = 'block_' + nextNumber;
+				numberToFindEl.innerHTML = counter;
+			}
+		}
+
+		function block(n, x, y) {
+			var _ = document.createElement('div');
+			_.className = 'block';
+			_.style.top = y + 'px';
+			_.style.left = x + 'px';
+			_.innerHTML = n;
+			_.id = 'block_' + n;
+			_.addEventListener('click', clickHandler);
+			return _;
+		}
+
+		function blocks(mat, margin) {
+			numArr = [];
+			numberArray(mat);
+			numArr = shuffle(numArr, numArr.length/2);
+
+			var blocks = blocksEl //document.body;
+			blocks.style.width = (100*mat + margin*mat) + 'px'
+			blocks.style.height = (100*mat + margin*mat) + 'px'
+
+			margin = margin || 1;
+			var x = margin, y = margin, c = 0;
+			for(var i=0;i<mat;i++) {
+				x = margin;
+				for(var k=0;k<mat;k++) {
+					blocks.appendChild(block(nextRandom(), x, y));
+					x += (100 + margin);
+				}
+				y += (100 + margin);
+			}
+			numArr = shuffle(numArr);
+		}
+
+		function clearBlocks() {
+			var blks = document.body.querySelectorAll('.block');
+			blks = [].slice.call(blks);
+			for(var key in blks) {
+				blks[key].parentElement.removeChild(blks[key]);
+			}
+		}
+
+		function timer() {
+			timerHandleID = setInterval(function () {
+				var cT = new Date().getTime();
+				sec = ((cT - lastTime)/1000);
+				if(cT - check_time >= 3000) {
+					document.querySelector('#block_' + counter).classList.add('border');
+				}
+				counterEl.innerHTML = sec.toFixed(3);
+			}, 1);
+		}
+
+		function restart(mat) {
+
+			loadElementRefs()
+
+			if(startLock)
+				return;
+
+			sec = 0;
+			counter = 1;
+			counterEl.innerHTML = '0.000';
+			numberToFindEl.innerHTML = counter;
+			restartEl.style.display = 'none';
+			numberToFindEl.style.display = '';
+			clearInterval(timerHandleID);
+			clearBlocks();
+			blocks(mat || 2, 20);
+
+			startLock=true;
+		}
+	</script>
+</head>
+<body onload="restart(5)">
+	<div id="header">
+		<div class="wrap-inline">
+			<div id="restart" class="button" onclick="restart(5)">Restart?</div>
+		</div>
+		<div class="wrap-inline">
+			<div id="counter">0.000</div>
+		</div>
+		<div class="wrap-inline" style="position: absolute; right: 15px">
+			<div id="numberToFind">1</div>
+		</div>
+	</div>
+	<div id="container">
+		<div id="blocks"></div>
+	</div>
+</body>
+</html>
