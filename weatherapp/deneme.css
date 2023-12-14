@@ -1,0 +1,76 @@
+/* styles.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #3498db, #6a89cc); /* Gradient arka plan rengi */
+    margin: 0;
+    padding: 0;
+    color: #fff; /* Beyaz metin rengi */
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: rgba(33, 104, 203, 0.934); /* Beyaz bir arka plan rengi */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+h1 {
+    color: #010101; /* Mavi renk */
+}
+
+.search-container {
+    margin-top: 20px;
+}
+
+input {
+    padding: 12px;
+    margin-right: 10px;
+    border: 2px solid #000000; /* Mavi sınır rengi */
+    border-radius: 10px;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #000000; /* Yeşil renk */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.weather-result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Beyaz bir arka plan rengi, hafif şeffaflık */
+    border: 1px solid #91d5ff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+.weather-result p {
+    margin: 10px 0;
+    font-size: 16px; /* Metin boyutu */
+}
+
+#weatherImage {
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

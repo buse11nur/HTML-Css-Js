@@ -1,0 +1,200 @@
+<html>
+<body>
+<form name="myform">
+<p>Please locate where 'locate' occurs!.</p>
+Find index of 'locate':<input type="text" name="l1" value=""> <br><br>
+<input type="button" value="Findindex" onClick="myindex()"><br><br>
+<input type="text" name="result" value=""><br><br>
+</form>
+
+<script>
+var str,pos;
+function myindex() {
+     str = document.myform.l1.value;
+     pos = str.indexOf("locate");
+    document.myform.result.value=pos;
+}
+</script>
+</body>
+</html>
+
+<html>
+<body>
+<form name="myform">
+<p>Please Find CSE203!.</p>
+Search:<input type="text" name="l1" value=""> <br><br>
+<input type="button" value=“Search" onClick="mysearch()"><br><br>
+<input type="text" name="result" value=""><br><br>
+</form>
+<script>
+var str,pos;
+function mysearch() {
+     str = document.myform.l1.value;
+     pos = str.search("CSE203");
+    document.myform.result.value=pos;
+}</script>
+</body>
+</html>
+
+<html>
+<body>
+<form name="myform">
+Number:<input type="text" name="n1" value=""> <br><br>
+<input type="button" value="Fix the number using 2 decimal points" onClick="myfix()"><br><br>
+<input type="text" name="result" value=""><br><br>
+</form>
+
+<script>
+var num,f;
+function myfix() {
+     num = Number(document.myform.n1.value);
+     f = num.toFixed(2);
+    document.myform.result.value=f;
+}
+</script>
+</body>
+</html>
+
+<html>
+<body>
+<script>
+var students=[
+ {
+    "name" : "John",
+    "age" : 25,
+    "hight" : 170
+},
+{
+    "name" : "Amy",
+    "age" : 28,
+    "hight" : 180
+}
+]
+console.log(JSON.parse(students)[1].name);
+
+    </script>
+</body>
+</html>
+
+<html>
+<head>
+<script> 
+function validate() { 
+var userName = document.myform.txtName.value;
+if (userName.length == 0) {
+ alert("Please, enter your name");
+ return false;
+ } else
+ { alert("Thank you, " + userName); 
+} }
+</script> 
+</head>
+<body>
+<form name="myform" action="" method="post">
+ <p>First Name:<input type="text" name="txtName" /> </p> 
+<p><input type="submit" value="Submit" onclick="validate()" /></p></form> 
+</body> 
+</html>
+<html>
+<head>
+<script type="text/javascript"> 
+function validate() { 
+var userName = document.getElementById("txtName").value;//Take the value of textbox 
+if (userName.length == 0) {
+ alert("Please, enter your name");
+ return false;
+ } else
+ { alert
+("Thank you, " + userName); } }
+</script> 
+</head>
+<body>
+<form id="myForm" action=“a.php" method="post">
+ <p>First Name:<input type="text" id="txtName" name="txtName" /> </p> 
+<p><input type="submit" value="Submit" onclick="validate()" /></p></form> 
+</body> 
+</html>
+
+<html>
+<head>
+<title>Javascript Login Form Validation</title>
+
+<script src="login.js"></script>
+
+</head>
+
+<body>
+
+<h2>Javascript Login Form Validation</h2>
+<form id="form_id" method="post" name="myform">
+User Name :<input type="text" name="username" id="username"/>
+Password :<input type="password" name="password" id="password"/>
+<input type="button" value="Login" id="submit" onclick="validate()"/>
+</form>
+</body>
+</html>
+
+<html>
+<body >
+<script>
+var i = 0;
+var path = new Array();
+ 
+// LIST OF IMAGES
+path[0] = "1.jpg";
+path[1] = "2.jpg";
+path[2] = "3.jpg";
+
+function Image()
+{
+   document.slide.src = path[i];
+   if(i < path.length - 1) 
+          i++; 
+   else 
+     i = 0;
+   setTimeout("Image()",3000);//call function "Image()" every 3 seconds 
+}
+window.onload=Image;
+</script>
+
+<img height="400" name="slide" src="1.jpg" width="600" />
+</body>
+</html>
+
+<html>
+<body >
+<script>
+var i = 0;
+var whichimage =0;
+var path = new Array();
+ 
+// LIST OF IMAGES
+path[0] = "1.jpg";
+path[1] = "2.jpg";
+path[2] = "3.jpg";
+
+function Image()
+{
+   document.slide.src = path[i];
+   if(i < path.length-1 ) 
+{
+whichimage=i;
+          i++;
+} 
+   else 
+     i = 0;
+     setTimeout("Image()",3000);
+}
+function slidelink()
+{ if (whichimage == 0) 
+window.location = "a.html" 
+else if (whichimage == 1) 
+window.location = "https://www.google.com.tr/" 
+else if (whichimage == 2)
+ window.location = "c.html"
+ } 
+window.onload=Image;
+</script>
+<a href="javascript:slidelink()"> <img height="200" name="slide" src="1.jpg" width="400" /> </a>
+</body>
+</html>

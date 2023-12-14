@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first web site</title>
+    <script src="convert.js"></script>
+    <link rel="stylesheet" href="convert.css">
+</head>
+<body>
+    <div class="container">
+        <div class="input-container">
+            <form action="">
+                <label for="myinput">Please Enter Your Weight:</label>
+                <input type="text" value="" id="input" name="myinput">
+                <br>
+                <br>
+                <label for="weight">Choose Your Weight Measurement:</label>
+
+                <select name="weight" id="convert">
+                    <option value="kgtopounds">Kilogram to Pound</option>
+                    <option value="poundtokg">Pound to Kilogram</option>
+                </select>
+                <div class="result-container">
+                    <span id="answer"></span>
+                </div>
+            </form>
+        </div>
+        <button id="calculate">Convert!</button>
+        <div class="image-container">
+            <img src="x.jpeg" alt="Weight Conversion Image">
+        </div>
+    </div>
+    </body>
+</html>
